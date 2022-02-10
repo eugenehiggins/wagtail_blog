@@ -1,11 +1,18 @@
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
+
+from streams import blocks
 
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
+    # body = RichTextField(blank=True)
+
+    body = StreamField([
+        ("title", blocks.TitleBlock()),
+        ("cards", blocks.CardsBlock()),
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
+        StreamFieldPanel("body"),
     ]

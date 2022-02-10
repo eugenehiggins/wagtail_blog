@@ -1,11 +1,11 @@
 from django.conf import settings
-from django.urls import include, path
 from django.contrib import admin
-
+from django.urls import include, path
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from hobbyblog.api import api_router
 from search import views as search_views
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('search/', search_views.search, name='search'),
 
+    path('api/v2/', api_router.urls),
 ]
 
 
