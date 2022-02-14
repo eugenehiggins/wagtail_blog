@@ -14,6 +14,11 @@ from wagtail.snippets.models import register_snippet
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
+    displayTitle = models.CharField(max_length=100)
+
+    # body = StreamField([
+    #     ("cards", blocks.CardsBlock()),
+    # ], null=True, blank=True)
 
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
@@ -23,7 +28,9 @@ class BlogIndexPage(Page):
         return context
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
+        FieldPanel('intro', classname="full"),
+        FieldPanel('displayTitle', classname="full"),
+        # StreamFieldPanel("body"),
     ]
 
 
@@ -51,6 +58,7 @@ class BlogPage(Page):
 
     api_fields = [
         APIField('intro'),
+        APIField('displayTitle'),
         APIField('body'),
         APIField('tags'),
         APIField('categories'),

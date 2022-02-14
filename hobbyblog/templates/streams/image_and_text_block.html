@@ -1,0 +1,29 @@
+{% load static wagtailimages_tags %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12" style="border:1px solid #ddd">
+        <picture>
+            {% image self.image fill-786x552 as img %}
+            <img src="{{ img.url }}" alt="{{ image.alt }}" class="img-fluid {{ self.image_alignment }}">
+        </picture>
+        <div class="h-100 d-flex flex-column">
+            <h2>{{ self.title }}</h2>
+            <p>{{ self.text }}</p>
+
+            {% if self.link.url %}
+                <a href="{{ self.link.url }}" class="mt-auto btn btn-primary">
+                    {{ self.link.link_text }}
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+{#    <div class="col-xl-6 col-lg-6 col-md-6" style="border:1px solid #ddd">#}
+{#      <h2>Bootstrap Responsive Website</h2>#}
+{#      <p>Bootstrap is a famous front-end framework used to create mobile-first responsive websites. The latest release#}
+{#        version of bootstrap has removed JQuery dependency not fully work on vanilla javascript.</p>#}
+{#      <p>Using bootstrap it becomes very easy to build a responsive website.</p>#}
+{#    </div>#}
+  </div>
+</div>

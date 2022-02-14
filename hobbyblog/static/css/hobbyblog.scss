@@ -1,0 +1,23 @@
+@import 'bootstrap/scss/bootstrap';
+@font-face {
+  font-family: 'barbarian';
+  src: local('Barbarian'),
+       url('../fonts/Barbarian.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'seaweed-script';
+  src: local('SeaweedScriptRegular'),
+       url('../fonts/SeaweedScript-Regular.ttf') format("truetype");
+}
+
+.blog-header-logo {
+  font-family: "Barbarian";
+  font-size: 76px;
+  text-decoration: none;
+}
+
+.main-feature-post {
+  font-family: 'seaweed-script';
+  font-size: 60px;
+  text-decoration: none;
+}

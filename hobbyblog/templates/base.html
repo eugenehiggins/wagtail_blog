@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static  wagtailcore_tags wagtailuserbar sass_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -17,7 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/hobbyblog.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% sass_src 'css/hobbyblog.scss' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}

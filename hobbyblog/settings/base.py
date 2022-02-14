@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.api.v2',
 
+    'sass_processor',
+
     'modelcluster',
     'taggit',
 
@@ -140,10 +142,12 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
+    ('node_modules', os.path.join(PROJECT_DIR, 'node_modules')),
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
@@ -153,6 +157,13 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'node_modules'),
+]
+SASS_PRECISION = 8
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
