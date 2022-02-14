@@ -7761,4 +7761,15 @@ textarea.form-control-lg {
   font-size: 60px;
   text-decoration: none; }
 
+.jumbotron {
+  height: 0;
+  position: relative;
+  padding: 56.25% 0 0 !important;
+  background-size: cover; }
+  .jumbotron .jumbotron-text {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    right: 0; }
+
 /*# sourceMappingURL=hobbyblog.css.map */

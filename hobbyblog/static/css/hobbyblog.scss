@@ -21,3 +21,17 @@
   font-size: 60px;
   text-decoration: none;
 }
+
+.jumbotron {
+  height: 0;
+  position: relative;
+  padding: 56.25% 0 0 !important;
+  background-size: cover;
+
+  .jumbotron-text {
+    position: absolute;
+    top: 23em;
+    left: 0;
+    right: 0;
+  }
+}
