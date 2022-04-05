@@ -7,6 +7,7 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.api import APIField
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page, Orderable
+from wagtail.images.api.fields import ImageRenditionField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
@@ -37,7 +38,7 @@ class BlogIndexPage(Page):
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey(
         'BlogPage',
-        related_name='taged_items',
+        related_name='tagged_items',
         on_delete=models.CASCADE,
     )
 
@@ -48,6 +49,7 @@ class BlogPage(Page):
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+    hero = models.BooleanField(blank=True, help_text="Is this a hero post?", default=False)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -58,10 +60,13 @@ class BlogPage(Page):
 
     api_fields = [
         APIField('intro'),
-        APIField('displayTitle'),
         APIField('body'),
         APIField('tags'),
         APIField('categories'),
+        APIField('hero'),
+        APIField('tags'),
+        APIField('date'),
+        APIField('gallery_images'),
     ]
 
     search_fields = Page.search_fields + [
@@ -74,9 +79,11 @@ class BlogPage(Page):
             FieldPanel('date'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('hero', widget=forms.CheckboxInput)
         ], heading="Blog information"),
         FieldPanel('intro'),
         FieldPanel('body'),
+
         InlinePanel('gallery_images', label="Gallery images"),
     ]
 
@@ -91,6 +98,12 @@ class BlogPageGalleryImage(Orderable):
     panels = [
         ImageChooserPanel('image'),
         FieldPanel('caption'),
+    ]
+
+    api_fields = [
+        APIField("image"),
+        APIField('image_thumbnail', serializer=ImageRenditionField('fill-300x200', source='image')),
+
     ]
 
 

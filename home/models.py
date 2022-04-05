@@ -1,4 +1,5 @@
 from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.api import APIField
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 
@@ -14,6 +15,10 @@ class HomePage(Page):
         ("image_and_text", blocks.ImageAndTextBlock()),
         ("cta", blocks.CallToActionBlock()),
     ], null=True, blank=True)
+
+    api_fields = [
+        APIField('body'),
+    ]
 
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
